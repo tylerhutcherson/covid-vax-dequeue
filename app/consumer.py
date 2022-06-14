@@ -7,6 +7,7 @@ from utils import (
     PATIENT_QUEUE
 )
 from collections import defaultdict
+from pprint import pprint
 
 
 LINES = 6
@@ -41,7 +42,7 @@ class Consumer(threading.Thread):
 if __name__ == "__main__":
     print("Covid vax clinic open!", flush=True)
 
-    # Start threads
+    # Start consumer threads
     for i in range(LINES):
         consumer = Consumer(i+1)
         consumer.start()
@@ -52,7 +53,6 @@ if __name__ == "__main__":
         print("Processing patients...", r.llen(PATIENT_QUEUE), "remaining...", flush=True)
         time.sleep(1)
 
-    print("Cavid vax patient line empty!", flush=True)
-    print(TRACKER, flush=True)
-    # TODO - the tracker could also have been implemented as a Redis hash
+    print("Cavid vax patient line empty!\n", flush=True)
+    pprint(dict(TRACKER), flush=True)
     
