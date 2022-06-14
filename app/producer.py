@@ -1,6 +1,6 @@
 import json
 
-from app.utils import (
+from utils import (
     get_redis,
     PATIENT_QUEUE
 )
@@ -18,5 +18,5 @@ if __name__ == "__main__":
     for i in range(NUM_PATIENTS):
         r.lpush(PATIENT_QUEUE, json.dumps({'patient_id': i}))
     
-    print(f'Line is now full and contains {r.llen(PATIENT_QUEUE)} patients...', flush=True)
+    print("Line is now full and contains", r.llen(PATIENT_QUEUE), "patients...", flush=True)
     

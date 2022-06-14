@@ -2,7 +2,7 @@ import random
 import time
 import threading
 
-from app.utils import (
+from utils import (
     get_redis,
     PATIENT_QUEUE
 )
@@ -23,7 +23,7 @@ class Consumer(threading.Thread):
         super(Consumer, self).__init__()
         self.name = f'vax_line_{i}'
         self.redis_client = get_redis()
-        print(f'Covid vax line {i} open for serving...', flush=True)
+        print("Covid", self.name, "open for serving...", flush=True)
 
     def run(self):
         while True:
@@ -39,7 +39,7 @@ class Consumer(threading.Thread):
 
 
 if __name__ == "__main__":
-    print('Covid vax clinic open!', flush=True)
+    print("Covid vax clinic open!", flush=True)
 
     # Start threads
     for i in range(LINES):
@@ -49,10 +49,10 @@ if __name__ == "__main__":
     # Check for completion
     r = get_redis()
     while r.exists(PATIENT_QUEUE):
-        print(f'Processing patients... {r.llen(PATIENT_QUEUE)} remaining', flush=True)
+        print("Processing patients...", r.llen(PATIENT_QUEUE), "remaining...", flush=True)
         time.sleep(1)
 
-    print('Cavid vax patient line empty!', flush=True)
+    print("Cavid vax patient line empty!", flush=True)
     print(TRACKER, flush=True)
     # TODO - the tracker could also have been implemented as a Redis hash
     
