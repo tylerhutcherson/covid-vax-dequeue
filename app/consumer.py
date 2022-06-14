@@ -54,5 +54,5 @@ if __name__ == "__main__":
         time.sleep(1)
 
     print("Cavid vax patient line empty!\n", flush=True)
-    pprint(dict(TRACKER), flush=True)
+    pprint(dict(TRACKER))
     
